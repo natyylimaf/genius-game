@@ -17,3 +17,37 @@
   margin: 0;
   padding: 0;
 }
+
+
+/* Centraliza o jogo na tela */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.game {
+  text-align: center;
+  padding: 24px;
+}
+
+h1 {
+  font-size: 2.6rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.info {
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+#status {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
