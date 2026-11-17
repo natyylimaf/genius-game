@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genius</title>
+</head>
+<body>
+  <main class="game">
+    <h1>Genius</h1>
+
+    <!-- Área de informações do jogo -->
+    <div class="info">
+      <p id="status">Aperte iniciar para jogar</p>
+      <p>Rodada: <span id="round">0</span> &nbsp;|&nbsp; Recorde: <span id="best">0</span></p>
+    </div>
+
+    <!-- Tabuleiro com os 4 botões coloridos -->
+    <div class="board" id="board">
+      <button class="pad green" data-color="green" aria-label="Verde" disabled></button>
+      <button class="pad red" data-color="red" aria-label="Vermelho" disabled></button>
+      <button class="pad yellow" data-color="yellow" aria-label="Amarelo" disabled></button>
+      <button class="pad blue" data-color="blue" aria-label="Azul" disabled></button>
+    </div>
+
+    <button id="start" class="start">Iniciar</button>
+  </main>
+</body>
+</html>
