@@ -74,3 +74,30 @@ function startGame() {
 }
 
 startButton.addEventListener("click", startGame);
+
+
+// Trata o clique do jogador e confere se acertou
+async function handlePadClick(event) {
+  const color = event.currentTarget.dataset.color;
+  setPadsEnabled(false);
+  await flash(color, 200);
+
+  if (color !== sequence[playerIndex]) {
+    // Provisório: o game over de verdade vem na próxima etapa
+    statusText.textContent = "Errou!";
+    startButton.disabled = false;
+    return;
+  }
+
+  playerIndex++;
+
+  if (playerIndex === sequence.length) {
+    statusText.textContent = "Muito bem!";
+    await sleep(800);
+    nextRound();
+  } else {
+    setPadsEnabled(true);
+  }
+}
+
+pads.forEach((pad) => pad.addEventListener("click", handlePadClick));
