@@ -73,6 +73,7 @@ h1 {
   cursor: pointer;
   background: var(--pad-color);
   opacity: 0.55;
+  transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 
 .pad:disabled {
@@ -95,4 +96,53 @@ h1 {
   border: none;
   border-radius: 999px;
   cursor: pointer;
+}
+
+
+/* Só reage ao mouse quando o botão está liberado */
+.pad:not(:disabled):hover {
+  opacity: 0.8;
+}
+
+.pad:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+
+/* Estado aceso: usado ao mostrar a sequência e ao clicar */
+.pad.active {
+  opacity: 1;
+  transform: scale(1.03);
+  box-shadow: 0 0 28px 8px var(--pad-color);
+}
+
+
+/* Animação de erro no tabuleiro */
+.board.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+.start:hover:not(:disabled) {
+  background: #ffffff;
+}
+
+.start:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+
+/* Respeita quem desativou animações no sistema */
+@media (prefers-reduced-motion: reduce) {
+  .pad,
+  .board.shake {
+    transition: none;
+    animation: none;
+  }
 }
