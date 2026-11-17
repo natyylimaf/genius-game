@@ -1,0 +1,19 @@
+/* Variáveis */
+:root {
+  --bg: #14141f;
+  --board-bg: #0a0a12;
+  --text: #f1f1f5;
+
+  --green: #1fbf4c;
+  --red: #e63946;
+  --yellow: #f4c20d;
+  --blue: #2d7ff9;
+}
+
+
+/* Zera as margens padrão do navegador e deixa o tamanho dos elementos previsível */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
