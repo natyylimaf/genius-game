@@ -2,6 +2,8 @@
 const COLORS = ["green", "red", "yellow", "blue"];
 // Chave utilizada para salvar o recorde no armazenamento do navegador
 const BEST_KEY = "genius-best-score";
+// Frequência (em Hz) do som de cada cor
+const TONES = { green: 392, red: 330, yellow: 262, blue: 523 };
 
 // Elementos da página
 const board = document.getElementById("board");
@@ -50,6 +52,37 @@ function getPad(color) {
 }
 
 
+// O navegador só libera áudio depois de um clique do usuário,
+// então o contexto de áudio é criado na primeira vez que um som toca
+let audioCtx;
+
+// Toca um tom na frequência e duração (em ms) informadas
+function playTone(frequency, duration, type = "sine") {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  const end = audioCtx.currentTime + duration / 1000;
+
+  osc.type = type;
+  osc.frequency.value = frequency;
+
+  // Volume baixo, que some suavemente no fim
+  gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.0001, end);
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(end);
+}
+
+
 // Gera uma cor aleatória e adiciona ao fim da sequência
 function addRandomColor() {
   const index = Math.floor(Math.random() * COLORS.length);
@@ -61,6 +94,7 @@ function addRandomColor() {
 async function flash(color, duration = 400) {
   const pad = getPad(color);
   pad.classList.add("active");
+  playTone(TONES[color], duration);
   await sleep(duration);
   pad.classList.remove("active");
   await sleep(150);
