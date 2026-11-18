@@ -12,11 +12,15 @@ const startButton = document.getElementById("start");
 const statusText = document.getElementById("status");
 const roundText = document.getElementById("round");
 const bestText = document.getElementById("best");
+const muteButton = document.getElementById("mute");
 
 // Armazena a sequência de cores que o jogo gera
 let sequence = [];
 // Indica a posição da próxima cor que o jogador deve clicar
 let playerIndex = 0;
+
+// Indica se o som está ligado
+let soundOn = true;
 
 // Carrega o recorde salvo e exibe na tela
 let bestScore = loadBestScore();
@@ -58,6 +62,7 @@ let audioCtx;
 
 // Toca um tom na frequência e duração (em ms) informadas
 function playTone(frequency, duration, type = "sine") {
+  if (!soundOn) return; // som desligado
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
@@ -190,6 +195,17 @@ async function handlePadClick(event) {
     setPadsEnabled(true);
   }
 }
+
+
+// Liga ou desliga o som e atualiza o texto do botão
+function toggleSound() {
+  soundOn = !soundOn;
+  muteButton.textContent = soundOn ? "🔊 Som ligado" : "🔇 Som desligado";
+  muteButton.setAttribute("aria-pressed", String(!soundOn));
+}
+
+muteButton.addEventListener("click", toggleSound);
+
 
 pads.forEach((pad) => pad.addEventListener("click", handlePadClick));
 startButton.addEventListener("click", startGame);
