@@ -141,10 +141,8 @@ async function handlePadClick(event) {
   await flash(color, 200);
 
   if (color !== sequence[playerIndex]) {
-    if (color !== sequence[playerIndex]) {
     gameOver();
     return;
-    }
   }
 
   playerIndex++;
