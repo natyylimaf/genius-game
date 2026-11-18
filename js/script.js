@@ -1,5 +1,7 @@
 // Cores do jogo
 const COLORS = ["green", "red", "yellow", "blue"];
+// Chave utilizada para salvar o recorde no armazenamento do navegador
+const BEST_KEY = "genius-best-score";
 
 // Elementos da página
 const board = document.getElementById("board");
@@ -14,8 +16,32 @@ let sequence = [];
 // Indica a posição da próxima cor que o jogador deve clicar
 let playerIndex = 0;
 
+// Carrega o recorde salvo e exibe na tela
+let bestScore = loadBestScore();
+bestText.textContent = bestScore;
+
 // Pausa o código por alguns milissegundos
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+
+// Recupera o recorde salvo no armazenamento local do navegador
+function loadBestScore() {
+  try {
+    return Number(localStorage.getItem(BEST_KEY)) || 0;
+  } catch {
+    return 0;
+  }
+}
+
+
+// Salva o novo recorde no armazenamento local do navegador
+function saveBestScore(score) {
+  try {
+    localStorage.setItem(BEST_KEY, String(score));
+  } catch {
+    // sem localStorage: o recorde vale só até fechar a página
+  }
+}
 
 
 // Recebe o nome de uma cor e devolve o botão correspondente
@@ -40,8 +66,16 @@ async function flash(color, duration = 400) {
   await sleep(150);
 }
 
+
+// Habilita ou desabilita todos os botões de cores
 function setPadsEnabled(enabled) {
   pads.forEach((pad) => (pad.disabled = !enabled));
+}
+
+
+// A cada rodada a sequência fica um pouco mais rápida
+function getSpeed() {
+  return Math.max(150, 400 - (sequence.length - 1) * 20);
 }
 
 
@@ -52,7 +86,7 @@ async function playSequence() {
   await sleep(600);
 
   for (const color of sequence) {
-    await flash(color);
+    await flash(color, getSpeed());
   }
 
   playerIndex = 0;
@@ -60,12 +94,16 @@ async function playSequence() {
   setPadsEnabled(true);
 }
 
+
+// Inicia uma nova rodada adicionando uma cor à sequência
 async function nextRound() {
   addRandomColor();
   roundText.textContent = sequence.length;
   await playSequence();
 }
 
+
+// Inicia ou reinicia uma partida
 function startGame() {
   sequence = [];
   roundText.textContent = "0";
@@ -73,7 +111,27 @@ function startGame() {
   nextRound();
 }
 
-startButton.addEventListener("click", startGame);
+
+// Termina o jogo, atualiza o recorde e libera o botão de reiniciar
+function gameOver() {
+  const score = sequence.length - 1; // rodadas completadas
+  setPadsEnabled(false);
+
+  board.classList.add("shake");
+  setTimeout(() => board.classList.remove("shake"), 400);
+
+  if (score > bestScore) {
+    bestScore = score;
+    bestText.textContent = bestScore;
+    saveBestScore(bestScore);
+    statusText.textContent = `Game over! Novo recorde: ${score} rodadas`;
+  } else {
+    statusText.textContent = `Game over! Você completou ${score} rodadas`;
+  }
+
+  startButton.textContent = "Jogar de novo";
+  startButton.disabled = false;
+}
 
 
 // Trata o clique do jogador e confere se acertou
@@ -83,10 +141,10 @@ async function handlePadClick(event) {
   await flash(color, 200);
 
   if (color !== sequence[playerIndex]) {
-    // Provisório: o game over de verdade vem na próxima etapa
-    statusText.textContent = "Errou!";
-    startButton.disabled = false;
+    if (color !== sequence[playerIndex]) {
+    gameOver();
     return;
+    }
   }
 
   playerIndex++;
@@ -101,3 +159,4 @@ async function handlePadClick(event) {
 }
 
 pads.forEach((pad) => pad.addEventListener("click", handlePadClick));
+startButton.addEventListener("click", startGame);
