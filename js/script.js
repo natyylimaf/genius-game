@@ -150,6 +150,7 @@ function startGame() {
 function gameOver() {
   const score = sequence.length - 1; // rodadas completadas
   setPadsEnabled(false);
+  playTone(110, 600, "sawtooth"); // som grave e "áspero" de erro
 
   board.classList.add("shake");
   setTimeout(() => board.classList.remove("shake"), 400);
