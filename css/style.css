@@ -138,6 +138,25 @@ h1 {
 }
 
 
+/* Botão discreto para ligar/desligar o som */
+.mute {
+  display: block;
+  margin: 16px auto 0;
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--text);
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.mute:hover {
+  opacity: 1;
+}
+
+
 /* Respeita quem desativou animações no sistema */
 @media (prefers-reduced-motion: reduce) {
   .pad,
