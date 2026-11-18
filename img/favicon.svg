@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Genius</title>
+  <!-- Fundo redondo (mesma cor do tabuleiro) -->
+  <circle cx="32" cy="32" r="32" fill="#0a0a12"/>
+
+  <!-- Os 4 botões, com as cores do CSS -->
+  <path d="M30 30 L6 30 A24 24 0 0 1 30 6 Z" fill="#1fbf4c"/>   <!-- verde -->
+  <path d="M34 30 L34 6 A24 24 0 0 1 58 30 Z" fill="#e63946"/>  <!-- vermelho -->
+  <path d="M30 34 L30 58 A24 24 0 0 1 6 34 Z" fill="#f4c20d"/>  <!-- amarelo -->
+  <path d="M34 34 L58 34 A24 24 0 0 1 34 58 Z" fill="#2d7ff9"/> <!-- azul -->
+</svg>
