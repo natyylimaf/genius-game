@@ -4,10 +4,10 @@
   --board-bg: #0a0a12;
   --text: #f1f1f5;
 
-  --green: #1fbf4c;
-  --red: #e63946;
-  --yellow: #f4c20d;
-  --blue: #2d7ff9;
+  --verde: #1fbf4c;
+  --vermelho: #e63946;
+  --amarelo: #f4c20d;
+  --azul: #2d7ff9;
 }
 
 
@@ -30,7 +30,7 @@ body {
   font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-.game {
+.jogo {
   text-align: center;
   padding: 24px;
 }
@@ -62,7 +62,7 @@ h1 {
 
 
 /* Tabuleiro redondo com grade 2x2 */
-.board {
+.tabuleiro {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
@@ -75,27 +75,27 @@ h1 {
 }
 
 
-/* Estilo comum aos 4 botões; a cor vem de --pad-color, definida em cada cor abaixo */
-.pad {
+/* Estilo comum aos 4 botões; a cor vem de --cor-botao, definida em cada cor abaixo */
+.botao {
   border: none;
   cursor: pointer;
-  background: var(--pad-color);
+  background: var(--cor-botao);
   opacity: 0.55;
   transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 
-.pad:disabled {
+.botao:disabled {
   cursor: default;
 }
 
 
 /* Cada cor define sua variável e arredonda o canto externo, formando o círculo */
-.green  { --pad-color: var(--green);  border-top-left-radius: 100%; }
-.red    { --pad-color: var(--red);    border-top-right-radius: 100%; }
-.yellow { --pad-color: var(--yellow); border-bottom-left-radius: 100%; }
-.blue   { --pad-color: var(--blue);   border-bottom-right-radius: 100%; }
+.verde  { --cor-botao: var(--verde);  border-top-left-radius: 100%; }
+.vermelho    { --cor-botao: var(--vermelho);    border-top-right-radius: 100%; }
+.amarelo { --cor-botao: var(--amarelo); border-bottom-left-radius: 100%; }
+.azul   { --cor-botao: var(--azul);   border-bottom-right-radius: 100%; }
 
-.start {
+.iniciar {
   padding: 12px 36px;
   font-size: 1.1rem;
   font-weight: 700;
@@ -108,46 +108,46 @@ h1 {
 
 
 /* Só reage ao mouse quando o botão está liberado */
-.pad:not(:disabled):hover {
+.botao:not(:disabled):hover {
   opacity: 0.8;
 }
 
-.pad:not(:disabled):active {
+.botao:not(:disabled):active {
   transform: scale(0.97);
 }
 
 
 /* Estado aceso: usado ao mostrar a sequência e ao clicar */
-.pad.active {
+.botao.aceso {
   opacity: 1;
   transform: scale(1.03);
-  box-shadow: 0 0 28px 8px var(--pad-color);
+  box-shadow: 0 0 28px 8px var(--cor-botao);
 }
 
 
 /* Animação de erro no tabuleiro */
-.board.shake {
-  animation: shake 0.4s;
+.tabuleiro.tremer {
+  animation: tremer 0.4s;
 }
 
-@keyframes shake {
+@keyframes tremer {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-10px); }
   40%, 80% { transform: translateX(10px); }
 }
 
-.start:hover:not(:disabled) {
+.iniciar:hover:not(:disabled) {
   background: #ffffff;
 }
 
-.start:disabled {
+.iniciar:disabled {
   opacity: 0.4;
   cursor: default;
 }
 
 
 /* Botão para ligar/desligar o som */
-.mute {
+.som {
   display: block;
   margin: 16px auto 0;
   padding: 8px 20px;
@@ -160,15 +160,15 @@ h1 {
   opacity: 0.8;
 }
 
-.mute:hover {
+.som:hover {
   opacity: 1;
 }
 
 
 /* Respeita quem desativou animações no sistema */
 @media (prefers-reduced-motion: reduce) {
-  .pad,
-  .board.shake {
+  .botao,
+  .tabuleiro.tremer {
     transition: none;
     animation: none;
   }

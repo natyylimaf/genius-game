@@ -8,7 +8,7 @@
   <title>Genius</title>
 </head>
 <body>
-  <main class="game">
+  <main class="jogo">
     <h1>Genius</h1>
 
     <!-- Instruções de como jogar -->
@@ -20,21 +20,21 @@
     <!-- Área de informações do jogo -->
     <div class="info">
       <p id="status">Aperte iniciar para jogar</p>
-      <p>Rodada: <span id="round">0</span> &nbsp;|&nbsp; Recorde: <span id="best">0</span></p>
+      <p>Rodada: <span id="rodada">0</span> &nbsp;|&nbsp; Recorde: <span id="recorde">0</span></p>
     </div>
 
     <!-- Tabuleiro com os 4 botões coloridos -->
-    <div class="board" id="board">
-      <button class="pad green" data-color="green" aria-label="Verde" disabled></button>
-      <button class="pad red" data-color="red" aria-label="Vermelho" disabled></button>
-      <button class="pad yellow" data-color="yellow" aria-label="Amarelo" disabled></button>
-      <button class="pad blue" data-color="blue" aria-label="Azul" disabled></button>
+    <div class="tabuleiro" id="tabuleiro">
+      <button class="botao verde" data-cor="verde" aria-label="Verde" disabled></button>
+      <button class="botao vermelho" data-cor="vermelho" aria-label="Vermelho" disabled></button>
+      <button class="botao amarelo" data-cor="amarelo" aria-label="Amarelo" disabled></button>
+      <button class="botao azul" data-cor="azul" aria-label="Azul" disabled></button>
     </div>
 
-    <button id="start" class="start">Iniciar</button>
+    <button id="iniciar" class="iniciar">Iniciar</button>
 
     <!-- Liga e desliga o som do jogo -->
-    <button id="mute" class="mute" aria-pressed="false">🔊 Som ligado</button>
+    <button id="som" class="som" aria-pressed="false">🔊 Som ligado</button>
   </main>
 
   <script src="js/jogo.js"></script>
