@@ -145,7 +145,9 @@ async function nextRound() {
 // Inicia ou reinicia uma partida
 function startGame() {
   sequence = [];
+  playerIndex = 0;
   roundText.textContent = "0";
+  startButton.textContent = "Iniciar";
   startButton.disabled = true;
   nextRound();
 }
