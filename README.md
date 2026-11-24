@@ -69,11 +69,11 @@ Depois, abra o `index.html` no navegador. Não é preciso instalar nada.
 ```text
 genius-game/
 ├── css/
-│   └── style.css
+│   └── estilo.css
 ├── img/
 │   └── favicon.svg
 ├── js/
-│   └── script.js
+│   └── jogo.js
 ├── index.html
 └── README.md
 ```
@@ -86,5 +86,18 @@ genius-game/
 - Armazenamento local com `localStorage`
 - Variáveis CSS e animações
 - Versionamento com Git
+
+---
+
+## 🤖 Uso de inteligência artificial
+
+Usei o assistente de IA Claude em várias partes deste trabalho. Segue o detalhamento:
+
+- **Lógica do jogo (`jogo.js`):** usei a IA para me ajudar a escrever e corrigir as funções principais do jogo.
+- **Sons (`playTone`):** usei a IA para entender o código de som com Web Audio API.
+- **Funções assíncronas (`async`/`await`, `sleep`):** usei a IA para entender como mostrar a sequência com pausas.
+- **Recorde com `localStorage`:** usei a IA para escrever as funções que salvam e carregam o recorde no navegador e para entender como o `localStorage` funciona.
+- **HTML e CSS:** usei a IA para me ajudar em partes, como o tabuleiro redondo e as animações.
+- **Revisão final:** pedi para a IA conferir se o projeto atendia ao enunciado da C3. Ela apontou ajustes (nome dos arquivos, instruções na tela e reset do `startGame`) e me ajudou a aplicá-los.
 
 ---
